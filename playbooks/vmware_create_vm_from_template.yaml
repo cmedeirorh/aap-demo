@@ -1,0 +1,41 @@
+---
+- name: Create and start a virtual machine in VCenter from the template
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  
+  tasks:
+  - name: Clone the template
+    community.vmware.vmware_guest:
+      validate_certs: False
+      name: "{{ vm_name }}"
+      template: "{{ template }}"
+      datacenter: "{{ datacenter }}"
+      folder: "{{ folder }}"
+      state: poweredon
+      wait_for_ip_address: yes
+      wait_for_ip_address_timeout: 600
+    register: temp_created_vm
+    
+  - name: set fact for new vm
+    ansible.builtin.set_fact:
+      created_vm: "{{ temp_created_vm }}"
+    when: temp_created_vm.skip_reason is not defined
+    
+  - name: Print details
+    ansible.builtin.debug:
+      var: "temp_created_vm"
+    
+  - name: Setting Stats for the new VM 
+    ansible.builtin.set_stats:
+      data:
+        new_vm_name: "{{ vm_name }}"
+        new_vm_os: "{{ virtualmachine_ostype_choice if (virtualmachine_ostype_choice is defined and virtualmachine_ostype_choice != '') else 'Linux' | default ('Linux') }}"
+        new_vm_ip: "{{ created_vm.instance.ipv4 }}"
+        new_vm_provisioner: Ansible
+        #for SNOW Workflows
+        ci_name: "{{ vm_name }}"
+        ci_ip: "{{ created_vm.instance.ipv4 }}"
+        ci_os: "{{ virtualmachine_ostype_choice if (virtualmachine_ostype_choice is defined and virtualmachine_ostype_choice != '') else 'Linux' | default ('Linux') }}"
+        ci_provisioner: "{{ new_vm_provisioner | default('Ansible') }}"
+        ci_manufacturer: "VMWare"  

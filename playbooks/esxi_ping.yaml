@@ -1,0 +1,10 @@
+---
+- name: Get ESXI Hosts and create Inventory
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  
+  tasks:
+  - name: Get a list of all ESXi hosts
+    vmware.vmware_rest.vcenter_host_info:      
+    register: my_hosts

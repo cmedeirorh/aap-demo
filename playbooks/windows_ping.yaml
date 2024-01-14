@@ -1,0 +1,11 @@
+---
+- name: win_ping module demo
+  hosts: windows
+    
+  tasks:
+  - name: test connection
+    ansible.windows.win_ping:
+    
+  - name: Check my user name
+    ansible.windows.win_whoami:
+      

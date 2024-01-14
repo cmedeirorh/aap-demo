@@ -1,0 +1,9 @@
+- name: Intro to Ansible Playbooks
+  hosts: all
+  
+  tasks:
+    - name: Add the user 'bob'
+      ansible.builtin.user:
+        name: bob
+      become: yes
+      become_method: sudo

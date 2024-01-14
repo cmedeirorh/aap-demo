@@ -1,0 +1,22 @@
+---
+- name: Create and start a virtual machine in VCenter from the template
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  
+  tasks:
+  - name: Deploy a new VM based on the template
+    vmware.vmware_rest.vcenter_vmtemplate_libraryitems:
+      name: vm-from-template
+      library: '{{ nfs_lib.id }}'
+      template_library_item: '{{ my_template_item.id }}'
+      placement:
+        cluster: "{{ lookup('vmware.vmware_rest.cluster_moid', '/my_dc/host/my_cluster') }}"
+        folder: "{{ lookup('vmware.vmware_rest.folder_moid', '/my_dc/vm') }}"
+        resource_pool: "{{ lookup('vmware.vmware_rest.resource_pool_moid', '/my_dc/host/my_cluster/Resources') }}"
+      state: deploy
+    register: my_new_vm
+  
+  - name: Print details
+    ansible.builtin.debug:
+      msg: "temp_created_vm"

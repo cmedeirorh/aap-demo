@@ -1,0 +1,103 @@
+---
+- name: Download Tomcat from tomcat.apache.org
+  hosts: web
+  vars:
+    download_url_tomcat: https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.9/bin/apache-tomcat-10.1.9.tar.gz
+    download_url_app: https://tomcat.apache.org/tomcat-7.0-doc/appdev/sample/sample.war
+  tasks:
+   - name: Download Open JDK
+     become: yes
+     yum:
+      name: java-11-openjdk-headless
+      state: present
+  
+   - name: validate if Java is availble 
+     shell: 
+      java -version
+     
+   - name: Create the group
+     become: yes
+     group: 
+      name: tomcat
+      state: present
+
+   - name: Create the user
+     become: yes
+     user:
+        name: tomcat
+        state: present
+
+   - name: Create a Directory /opt/tomcat
+     become: yes
+     file:
+       path: /opt/tomcat
+       state: directory
+       mode: 0755
+       owner: tomcat
+       group: tomcat
+
+   - name: Download Tomcat using unarchive
+     become: yes
+     unarchive:
+       src: "{{download_url_tomcat}}"
+       dest: /opt/tomcat
+       mode: 0755
+       remote_src: yes
+       group: tomcat
+       owner: tomcat
+    
+   - name: Move files to the /opt/tomcat directory
+     become: yes
+     become_user: tomcat
+     shell: "mv /opt/tomcat/apache*/* /opt/tomcat"
+
+   - name: Creating a service file
+     become: yes
+     copy: 
+      content: |-
+        [Unit]
+        Description=Tomcat Service
+        Requires=network.target
+        After=network.target
+
+        [Service]
+        Type=forking
+        User=tomcat
+        Environment="CATALINA_PID=/opt/tomcat/logs/tomcat.pid"
+        Environment="CATALINA_BASE=/opt/tomcat"
+        Environment="CATALINA_HOME=/opt/tomcat"
+        Environment="CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC"
+
+        ExecStart=/opt/tomcat/bin/startup.sh
+        ExecStop=/opt/tomcat/bin/shutdown.sh
+        Restart=on-abnormal
+
+        [Install]
+        WantedBy=multi-user.target
+      dest: /etc/systemd/system/tomcat.service
+
+   - name: Download app
+     become: yes
+     unarchive:
+       src: "{{download_url_app}}"
+       dest: /opt/tomcat/webapps/
+       mode: 0755
+       remote_src: yes
+       group: tomcat
+       owner: tomcat
+
+   - name: Enable the tomcat service and start
+     become: yes
+     service:
+        name: tomcat
+        enabled: yes
+        state: started
+
+   - name: Connect to Tomcat server on port 8080 and check status 200 - Try 5 times
+     tags: test
+     uri:
+       url: http://localhost:8080
+     register: result
+     until: "result.status == 200"
+     retries: 5
+     delay: 10
