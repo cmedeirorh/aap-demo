@@ -1,6 +1,6 @@
 ---
 collections:
-  - community.vmware
-  - vmware.vmware_rest
-  - awx.awx
-  - containers.podman
+  - name: community.vmware
+  - name: vmware.vmware_rest
+  - name: awx.awx
+  - name: containers.podman
