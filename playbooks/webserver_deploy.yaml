@@ -1,41 +1,37 @@
 ---
-- hosts: webserver
+- hosts: web
   become: yes
-  
+ 
   tasks:
-  - name: Install required packages
-    package:
-      name: "{{ webserver_packages }}"
-      state: latest
+  - name: Install httpd and firewald packages
+    ansible.builtin.package:
+      name:
+        - httpd
+        - mod_ssl
+        - firewalld
+      state: present
+ 
+  - name: Enable httpd and firewald service to start on boot up
+    ansible.builtin.service:
+      name: "{{ item }}"
+      enabled: true
+    loop:
+      - httpd
+      - firewalld
       
-  - name: Enable service to start on boot up
-    service:
-      name: httpd
-      enabled: yes
-      state: started
-      
-  - name: Enable service to start on boot up
-    service:
-      name: firewalld
-      enabled: yes
-      state: started     
-      
-  - name: Create firewall rule for apache service
-    firewalld:
+  - name: Create firewall rule for httpd service
+    ansible.posix.firewalld:
       service: http
-      zone: public
-      permanent: yes
-      immediate: yes
+      permanent: true
       state: enabled
-      
+      immediate: true
+
   - name: Copy a custom index.html file
-    get_url:
-      url: https://raw.githubusercontent.com/caetanomedeiros/ansible-demos/main/files/index.html
+    ansible.builtin.copy:
+      src: index.html
       dest: /var/www/html/index.html
-      force: true
-      
-  handlers:
-  - name: Restart apache service
-    service:
+
+  - name: Reload httpd service if required
+    ansible.builtin.service:
       name: httpd
-      state: reload
+      state: reloaded
