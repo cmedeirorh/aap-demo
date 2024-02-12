@@ -19,3 +19,6 @@ zabbix.int.cmedeiros.net
 activationkey='rhel'
 org_id='5138492'
 ansible_user='cloud-user'
+
+[web]
+webserver.int.cmedeiros.net
