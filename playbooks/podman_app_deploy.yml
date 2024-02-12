@@ -12,10 +12,10 @@
   
   - name: Deploy application using podman
     containers.podman.podman_container:
-      name: {{ app_name }}
-      image: {{ app_image }}
+      name: "{{ app_name }}"
+      image: "{{ app_image }}"
       ports:
-        - {{ app_ports }} # 80:8080
+        - "{{ app_ports }}" # 80:8080
 
   - name: Enable firewald service to start on boot up
     ansible.builtin.systemd:
