@@ -17,5 +17,5 @@
   - name: Restart an instance by name
     amazon.aws.ec2_instance:
       state: restarted
-      name: "{{ vm_info.instances[0].instance_id }}"
+      instance_ids: "{{ vm_info.instances[0].instance_id }}"
       region: "{{ vm_aws_region }}"
