@@ -18,3 +18,4 @@
     amazon.aws.ec2_instance:
       state: restarted
       name: "{{ vm_name }}"
+      region: "{{ vm_aws_region }}"
