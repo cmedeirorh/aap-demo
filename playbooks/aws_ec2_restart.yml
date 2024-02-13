@@ -14,7 +14,7 @@
     ansible.builtin.debug:
       msg: "{{ vm_info }}"
 
-    - name: Restart an instance by name
-      amazon.aws.ec2_instance:
-        state: restarted
-        name: "{{ vm_name }}"
+  - name: Restart an instance by name
+    amazon.aws.ec2_instance:
+      state: restarted
+      name: "{{ vm_name }}"
