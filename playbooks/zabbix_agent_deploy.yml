@@ -1,0 +1,16 @@
+---
+- name: Check if the VM is already provisioned
+  amazon.aws.ec2_instance_info:
+    filters:
+      "tag:Name": "{{ vm_name }}"
+    region: "{{ vm_aws_region }}"
+  register: vm_info
+
+- name: Print VM Information
+  ansible.builtin.debug:
+    msg: "{{ vm_info }}"
+
+  - name: Restart an instance by name
+    amazon.aws.ec2_instance:
+      state: restarted
+      name: "{{ vm_name }}"
