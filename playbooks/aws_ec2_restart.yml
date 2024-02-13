@@ -12,10 +12,10 @@
 
   - name: Print VM Information
     ansible.builtin.debug:
-      msg: "{{ vm_info.instances.instance_id }}"
+      msg: "{{ vm_info.instances[0].instance_id }}"
 
   - name: Restart an instance by name
     amazon.aws.ec2_instance:
       state: restarted
-      name: "{{ vm_info.instances.instance_id }}"
+      name: "{{ vm_info.instances[0].instance_id }}"
       region: "{{ vm_aws_region }}"
