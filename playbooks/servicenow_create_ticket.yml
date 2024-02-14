@@ -10,9 +10,9 @@
         host: "{{ snow_host }}"
         username: "{{ snow_user }}"
         password: "{{ snow_password }}"
-      state: present
+      state: new
       type: standard
-      priority: medium
+      priority: moderate
       impact: medium
       urgency: medium
       short_description: "{{ snow_desc_short }}"
