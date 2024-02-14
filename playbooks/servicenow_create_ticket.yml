@@ -11,7 +11,7 @@
         username: "{{ snow_user }}"
         password: "{{ snow_password }}"
       state: new
-      caller: "{{ snow_caller }}"
+      #caller: "{{ snow_caller }}"
       impact: medium
       urgency: medium
       short_description: "{{ snow_desc_short }}"
