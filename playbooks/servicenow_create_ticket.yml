@@ -1,21 +1,24 @@
 ---
 - name: Create ticket with notes
   hosts: localhost
-  gather_facts: no
+  gather_facts: false
 
   tasks:
-  - name: Create a change request
-    snow_record:
+  - name: Create a ServiceNow change request
+    servicenow.itsm.change_request:
+      instance: 
+        host: "{{ snow_host }}"
+        username: "{{ snow_user }}"
+        password: "{{ snow_password }}"
       state: present
-      table: change_request
-      username: "{{ sn_username }}"
-      password: "{{ sn_password }}"
-      instance: "{{ sn_instance }}"
-      data:
-        severity: "{{ sn_severity }}"
-        priority: "{{ sn_priority }}"
-        short_description: "This is a test opened by Ansible"
-    register: new_incident
-
-  - debug: 
-      var: new_incident.record
+      type: standard
+      priority: medium
+      impact: medium
+      urgency: medium
+      short_description: "{{ snow_desc_short }}"
+      description: "{{ snow_desc_long }}"
+    register: new_ticket
+    
+  - name: Print details from previous task
+    ansible.builtin.debug:
+      var: new_ticket
