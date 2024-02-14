@@ -6,10 +6,6 @@
   tasks:
   - name: Create a ServiceNow change request
     servicenow.itsm.incident:
-      instance: 
-        host: "{{ snow_host }}"
-        username: "{{ snow_user }}"
-        password: "{{ snow_password }}"
       state: new
       caller: "{{ snow_caller }}"
       impact: medium
