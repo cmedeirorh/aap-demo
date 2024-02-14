@@ -5,13 +5,13 @@
 
   tasks:
   - name: Create a ServiceNow change request
-    servicenow.itsm.change_request:
+    servicenow.itsm.incident:
       instance: 
         host: "{{ snow_host }}"
         username: "{{ snow_user }}"
         password: "{{ snow_password }}"
       state: new
-      type: standard
+      caller: "{{ snow_caller }}"
       priority: moderate
       impact: medium
       urgency: medium
