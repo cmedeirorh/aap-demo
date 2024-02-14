@@ -12,7 +12,6 @@
         password: "{{ snow_password }}"
       state: new
       caller: "{{ snow_caller }}"
-      priority: moderate
       impact: medium
       urgency: medium
       short_description: "{{ snow_desc_short }}"
