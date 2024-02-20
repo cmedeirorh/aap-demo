@@ -5,4 +5,4 @@
   tasks:
   - name: Print all available facts
     ansible.builtin.debug:
-      var: "{{ test }}"
+      var: "{{ test2 }}"
