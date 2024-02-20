@@ -1,0 +1,8 @@
+---
+- hosts: all
+  become: yes
+ 
+  tasks:
+  - name: Print all available facts
+    ansible.builtin.debug:
+      var: "{{ _hosts }}"
