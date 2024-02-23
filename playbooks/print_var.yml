@@ -1,6 +1,8 @@
 ---
-- hosts: all
-  become: no
+- Test EDA Events VARs
+  hosts: localhost
+  connection: local
+  gather_facts: yes
    
   tasks:
   - name: Print all available facts
