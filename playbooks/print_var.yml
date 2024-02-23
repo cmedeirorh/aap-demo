@@ -7,8 +7,11 @@
   - name: Print all available facts
     ansible.builtin.debug:
       msg: '{{ ansible_eda.event }}'
+    when: ansible_eda.event is defined
+    ignore_errors: true
 
   - name: Print var
     ansible.builtin.debug:
       msg: '{{ foo }}'
-      
+    when: foo is defined
+    ignore_errors: true
