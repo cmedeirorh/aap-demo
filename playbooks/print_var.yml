@@ -1,5 +1,5 @@
 ---
-- Test EDA Events VARs
+- name: Test EDA Events VARs
   hosts: localhost
   connection: local
   gather_facts: yes
