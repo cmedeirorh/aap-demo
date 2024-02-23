@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: '{{ foo }}'
   become: no
   gather_facts: no
  
