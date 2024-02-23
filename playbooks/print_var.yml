@@ -1,5 +1,5 @@
 ---
-- hosts: '{{ foo }}'
+- hosts: all
   become: no
   gather_facts: no
  
