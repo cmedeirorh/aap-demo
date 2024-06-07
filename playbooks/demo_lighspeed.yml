@@ -5,6 +5,7 @@
 
   tasks:
     #- name: enable cisco_ios interface gigabit
+    #- name: create a file in a windows server
 
     #- name: print all cisco_ios facts with gather_subset as a {var}
 

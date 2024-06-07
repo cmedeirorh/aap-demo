@@ -1,54 +1,20 @@
 ---
-- name: RHEL  
+- name: Test Lighspeed  
   hosts: all
   gather_facts: false
 
   tasks:
     #- name: enable cisco_ios interface gigabit
+    #- name: create a file in a windows server
 
-    #- name: print all cisco_ios facts
-       
-    #- name: print all cisco_ios facts with gather_subset as a {{var}}
-
-    # Validate ansible can connect to inventory & create a new dyanmic inventory & continue to run setup
-    
-    
-
+    #- name: print all cisco_ios facts with gather_subset as a {var}
 
     # Install postgresql-server & run postgresql-setup command & enable postgresql-server to start at boot
-    # Content suggestion provided by Ansible Lightspeed
-    - name: Install postgresql-server
-      when: ansible_os_family == "RedHat"
-      ansible.builtin.package:
-        name: postgresql-server
-        state: present
-
-    - name: Run postgresql-setup command
-      ansible.builtin.command: postgresql-setup initdb
-      when: ansible_os_family == "RedHat"
-
-    - name: Enable postgresql-server to start at boot
-      ansible.builtin.service:
-        name: postgresql
-        enabled: true
-    
+    #- name: show cisco_ios running config
    
-
-    # Setup and ec2 host xl.large with datadog package installed
- 
-     
-    - name: Install postgresql-server & postgresql-setup command
-
-    
-
-    - name: Enable postgresql-server to start at boot
-  
-    #- name: show running config
-
     #- name: update all packages on rhel when version is 8
-
+  
     #- name: debug msg of ansible_facts
-
     #- name: add Appstream repo
     
     #- name: add Appstream repo to rhel 8
@@ -72,8 +38,7 @@
     #- name: Merge provided OSPF Interfaces configuration
 
     #- name: create a list of users on rhel machine based on groups
-
-
+    
 
 
 
