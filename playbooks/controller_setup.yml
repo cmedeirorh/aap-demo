@@ -14,6 +14,17 @@
           username: "{{ aws_username }}"
           password: "{{ aws_password }}"
           
+    - name: Create SSH Key Credential for EC2
+      ansible.controller.credential:
+        name: "SSH Key for EC2 Credential"
+        credential_type: "Machine"
+        organization: Default
+        state: present
+        inputs:
+          ssh_key_data: "{{ ssh_key }}"
+          username: "{{ ssh_username }}"
+          become_method: sudo
+          
     - name: Create AWS Inventory
       ansible.controller.inventory_source:
         name: 'ec2'
