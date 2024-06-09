@@ -21,6 +21,7 @@
         inventory: Demo Inventory
         credential: AWS
         overwrite: true
+        update_on_launch: true
         source_vars:
           hostnames:
             - tag: Name
