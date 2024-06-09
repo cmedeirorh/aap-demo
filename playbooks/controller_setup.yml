@@ -22,7 +22,6 @@
         inventory: 'Workshop Inventory'
         credential: 'AWS EC2 Credential'
         overwrite: true
-        update_on_launch: true
         source_vars:
           hostnames:
             - tag:Name
