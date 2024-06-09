@@ -19,7 +19,7 @@
         name: 'ec2'
         organization: 'Default'
         source: 'ec2'
-        inventory: 'Demo Inventory'
+        inventory: 'Workshop Inventory'
         credential: 'AWS EC2 Credential'
         overwrite: true
         update_on_launch: true
