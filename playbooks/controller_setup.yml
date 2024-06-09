@@ -21,7 +21,7 @@
         organization: Default
         state: present
         inputs:
-          ssh_key_data: "{{ ssh_key }}"
+          ssh_key_data: "{{ lookup('file', '../files/workshop_key') }}"
           username: "{{ ssh_username }}"
           become_method: sudo
           
