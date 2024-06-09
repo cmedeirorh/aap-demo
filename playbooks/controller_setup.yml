@@ -16,6 +16,7 @@
           
     - name: Create AWS Inventory
       ansible.controller.inventory_source:
+        name: AWS ec2 Source
         organization: Default
         source: ec2
         inventory: Demo Inventory
