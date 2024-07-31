@@ -22,9 +22,9 @@
     #delegate_to: localhost
     servicenow.itsm.incident:
       instance:
-          host: "{{ sn_host }}"
-          username: "{{ sn_user }}"
-          password: "{{ sn_pass }}"
+          host: "{{ sn_instance }}"
+          username: "{{ sn_username }}"
+          password: "{{ sn_password }}"
       state: new
       caller: "ansible"
       impact: medium
