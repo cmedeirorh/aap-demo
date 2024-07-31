@@ -30,11 +30,11 @@
       urgency: medium
       short_description: "System Patch: {{ inventory_hostname }}"
       description: "{{ dnf_update_status }}"
-    register: new_ticket
+    register: ticket
     
   - name: Print details from previous task
     ansible.builtin.debug:
-      var: new_ticket
+      var: ticket
 
   - name: Reboot when required
     ansible.builtin.reboot:
