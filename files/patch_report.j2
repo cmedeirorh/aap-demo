@@ -5,7 +5,6 @@
 {% if hostvars[linux_host].dnf_update_status.changed|default("false",true) == true %}
 Packages and Updates:
 {% for packagename in hostvars[linux_host].dnf_update_status.results|sort %}
-
 {{ packagename }}
 {% endfor %}
 
