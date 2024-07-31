@@ -1,0 +1,19 @@
+{% for linux_host in ansible_play_hosts |sort %}
+            {{hostvars[linux_host]['inventory_hostname']}}
+            {{hostvars[linux_host]['ansible_os_family']|default("none")}}
+            {{hostvars[linux_host]['ansible_distribution_version']|default("none")}}
+            
+{% if hostvars[linux_host].dnf_update_status.changed|default("false",true) == true %}
+
+{% for packagename in hostvars[linux_host].dnf_update_status.changes.updated|sort %}
+{{ packagename[0] }} - {{ packagename[1] }}
+{% endfor %}
+
+{% elif hostvars[linux_host].dnf_update_status.changed is undefined %}
+Patching Failed
+
+{% else %}
+Compliant
+
+{% endif %}
+{% endfor %}
