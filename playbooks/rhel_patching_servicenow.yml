@@ -19,7 +19,6 @@
     ignore_errors: true
   
   - name: Create a ServiceNow change request
-    #delegate_to: localhost
     servicenow.itsm.incident:
       instance:
           host: "{{ sn_instance }}"
