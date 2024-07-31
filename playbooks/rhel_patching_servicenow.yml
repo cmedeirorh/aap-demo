@@ -36,7 +36,7 @@
       impact: medium
       urgency: medium
       short_description: "System Patch: {{ inventory_hostname }}"
-      description: "{{ dnf_update_status }}"
+      description: "{{ dnf_update_status.results }}"
     register: ticket
     
   - name: Print details from previous task
