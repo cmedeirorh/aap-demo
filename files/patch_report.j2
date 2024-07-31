@@ -3,8 +3,9 @@
     System: {{hostvars[linux_host]['ansible_os_family']|default("none")}} {{hostvars[linux_host]['ansible_distribution_version']|default("none")}}
             
 {% if hostvars[linux_host].dnf_update_status.changed|default("false",true) == true %}
+Packages and Updates:
 {% for packagename in hostvars[linux_host].dnf_update_status.results|sort %}
-Packages and Updates
+
 {{ packagename }}
 {% endfor %}
 
