@@ -27,6 +27,10 @@
     register: result
     ignore_errors: true
 
+  - name: Store DNF results as facts
+    ansible.builtin.set_fact: 
+      last_update: "{{ dnf_update_status }}"
+
   - name: Reboot when required
     ansible.builtin.reboot:
       msg: "Reboot initiated by Ansible"
