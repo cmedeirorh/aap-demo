@@ -16,3 +16,7 @@
   - name: Setting host facts using complex arguments
     ansible.builtin.set_fact:
       one_fact: something
+
+  - name: print facts
+    ansible.builtin.debug:
+      var: ansible_facts
