@@ -17,7 +17,7 @@
     
   - name: Create report
     ansible.builtin.template:
-      src: ../files/patch_report.j2
+      src: ../../files/patch_report.j2
       dest: "{{ report_path }}"
       mode: "0644"
     check_mode: false
