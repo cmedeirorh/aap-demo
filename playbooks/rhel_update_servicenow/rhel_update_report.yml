@@ -10,7 +10,7 @@
     ansible.builtin.dnf:
       name: '*'
       state: latest
-      download_only: {{ down_only }}
+      download_only: "{{ down_only }}"
       update_cache: true
       update_only: true
     register: dnf_update_status
