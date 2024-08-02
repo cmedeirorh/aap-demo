@@ -27,11 +27,6 @@
     register: result
     ignore_errors: true
 
-  - name: Store DNF results as facts
-    ansible.builtin.set_fact: 
-      last_update: "test"
-      cacheable: true
-
   - name: Reboot when required
     ansible.builtin.reboot:
       msg: "Reboot initiated by Ansible"
