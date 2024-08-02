@@ -10,7 +10,7 @@
     ansible.builtin.dnf:
       name: '*'
       state: latest
-      # exclude: '{{ excluded_pks }}'
+      download_only: {{ download_only }}
       update_cache: true
       update_only: true
     register: dnf_update_status
