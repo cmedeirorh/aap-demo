@@ -1,0 +1,27 @@
+---
+- name: Update all packages on RHEL
+  hosts: all
+  become: true
+  vars:
+    report_path: "/tmp/rhel_patch_report.txt"
+  
+  tasks:  
+  - name: Create a ServiceNow change request
+    servicenow.itsm.incident:
+      instance:
+          host: "{{ sn_instance }}"
+          username: "{{ sn_username }}"
+          password: "{{ sn_password }}"
+      state: new
+      caller: "ansible"
+      impact: medium
+      urgency: medium
+      short_description: "System Updated: {{ inventory_hostname }}"
+      description: "Package List: {{ dnf_update_status.results }}"
+      attachments:
+        - path: "{{ report_path }}"
+    register: ticket
+    
+  - name: Print details from previous task
+    ansible.builtin.debug:
+      var: ticket
