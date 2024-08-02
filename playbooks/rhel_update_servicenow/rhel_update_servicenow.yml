@@ -17,7 +17,7 @@
       impact: medium
       urgency: medium
       short_description: "System Updated: {{ inventory_hostname }}"
-      description: "Package List: {{ lookup('ansible.builtin.file', '/tmp/rhel_patch_report.txt') }}"
+      description: "Package List Attached"
       attachments:
         - path: "{{ report_path }}"
     register: ticket
