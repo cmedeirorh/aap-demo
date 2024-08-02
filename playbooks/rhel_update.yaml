@@ -12,3 +12,7 @@
       update_cache: yes
       update_only: yes
     register: dnf_update_status
+    
+  - name: Setting host facts using complex arguments
+    ansible.builtin.set_fact:
+      one_fact: something
