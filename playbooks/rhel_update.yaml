@@ -2,7 +2,7 @@
 - name: Update all packages on RHEL
   hosts: all
   become: true
-  gather_facts: true
+  gather_facts: false
    
   tasks:   
   - name: Update all installed packages using DNF module
