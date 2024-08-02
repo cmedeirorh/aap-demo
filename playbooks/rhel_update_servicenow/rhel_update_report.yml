@@ -29,7 +29,7 @@
 
   - name: Store DNF results as facts
     ansible.builtin.set_fact: 
-      last_update: "{{ dnf_update_status }}"
+      last_update: "test"
       cacheable: true
 
   - name: Reboot when required
