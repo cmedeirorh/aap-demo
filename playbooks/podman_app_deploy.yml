@@ -1,6 +1,6 @@
 ---
 - name: Deploy App on RHEL Using Podman
-  hosts: all
+  hosts: "{{ _hosts }}"
   become: true
   vars:
   - app_port: "8080"
