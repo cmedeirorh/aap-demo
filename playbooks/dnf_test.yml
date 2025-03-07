@@ -1,0 +1,25 @@
+---
+- name: DNF - check last Return-Code
+  hosts: localhost  # Or a specific group like 'servers'
+  become: true
+  gather_facts: true
+
+  tasks:
+    - name: DNF - gather last transaction stdout
+      command: dnf history info last -q
+      register: dnf_history_output
+      changed_when: false # indicate no system modifications.
+      check_mode: false # disable checking for changes.
+      when: ansible_pkg_mgr == 'dnf'
+
+    - name: DEBUG - command outout
+      ansible.builtin.debug:
+        var: dnf_history_output
+
+    - name: Convert output to dictionary
+      set_fact:
+        output: "{{ dnf_history_output.stdout_lines | community.general.dict(':', ' ') }}"
+
+    - name: DEBUG - command outout
+      ansible.builtin.debug:
+        var: output        
