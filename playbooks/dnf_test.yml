@@ -22,4 +22,4 @@
        
     - name: DEBUG - command outout
       ansible.builtin.debug:
-        msg: "{{ output | to_json }}"
+        msg: "{{ output | split | to_json }}"
