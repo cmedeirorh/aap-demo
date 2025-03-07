@@ -18,8 +18,8 @@
 
     - name: Convert output to dictionary
       set_fact:
-        #output: "{{ dnf_history_output.stdout_lines[6] | to_nice_json }}"
-        output: "{{ dnf_history_output.stdout_lines[6] |  map('trim') }}"
+        output: "{{ dnf_history_output.stdout_lines[6] | type_debug }}"
+       
     - name: DEBUG - command outout
       ansible.builtin.debug:
         var: output        
