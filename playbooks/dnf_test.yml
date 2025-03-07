@@ -14,7 +14,7 @@
 
     - name: DEBUG - command outout
       ansible.builtin.debug:
-        var: dnf_history_output
+        var: dnf_history_output.stdout_lines
 
     - name: Convert output to dictionary
       set_fact:
