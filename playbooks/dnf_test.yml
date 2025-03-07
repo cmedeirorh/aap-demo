@@ -2,7 +2,7 @@
 - name: DNF - check last Return-Code
   hosts: all
   become: true
-  gather_facts: true
+  gather_facts: false
 
   tasks:
     - name: DNF - gather last transaction stdout
