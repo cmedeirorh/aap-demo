@@ -18,7 +18,7 @@
 
     - name: Convert output to dictionary
       set_fact:
-        output: "{{ dnf_history_output.stdout | community.general.jv('User') }}"
+        output: "{{ dnf_history_output.stdout | community.general.jc('User') }}"
 
     - name: DEBUG - command outout
       ansible.builtin.debug:
