@@ -18,8 +18,8 @@
 
     - name: Convert output to dictionary
       set_fact:
-        output: "{{ dnf_history_output.stdout_lines[6] | regex_replace('[ ''\"]', '') }}"
+        output: "{{ dnf_history_output.stdout_lines[6] | regex_replace('[ ''\"]', '') | dict }}"
        
     - name: DEBUG - command outout
       ansible.builtin.debug:
-        var: output
+        var: output.[0]
