@@ -18,7 +18,7 @@
 
     - name: Convert output to dictionary
       set_fact:
-        output: "{{ dnf_history_output.stdout_lines | list }}"
+        output: "{{ dnf_history_output.stdout_lines[0] | list }}"
 
     - name: DEBUG - command outout
       ansible.builtin.debug:
