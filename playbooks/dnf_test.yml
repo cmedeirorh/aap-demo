@@ -16,10 +16,10 @@
       ansible.builtin.debug:
         var: dnf_history_output
 
-    - name: Convert output to dictionary
-      set_fact:
-        output: "{{ dnf_history_output.stdout_lines | community.general.dict(':', ' ') }}"
+#    - name: Convert output to dictionary
+#      set_fact:
+#        output: "{{ dnf_history_output.stdout_lines | community.general.dict(':', ' ') }}"
 
     - name: DEBUG - command outout
       ansible.builtin.debug:
-        var: output        
+        var: dnf_history_output.stdout        
