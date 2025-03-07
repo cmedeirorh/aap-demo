@@ -1,6 +1,6 @@
 ---
 - name: DNF - check last Return-Code
-  hosts: localhost  # Or a specific group like 'servers'
+  hosts: all
   become: true
   gather_facts: true
 
