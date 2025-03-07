@@ -6,7 +6,7 @@
 
   tasks:
     - name: DNF - gather last transaction stdout
-      shell: `dnf history info last -q|sed 's/[[:space:]]//g'`
+      command: dnf history info last -q
       register: dnf_history_output
       changed_when: false # indicate no system modifications.
       check_mode: false # disable checking for changes.
@@ -18,7 +18,7 @@
 
     - name: Convert output to dictionary
       set_fact:
-        output: "{{ dnf_history_output.stdout_lines[6] | split(':') }}"
+        output: "{{ dnf_history_output.stdout_lines[6] | regex_replace("\s","") | split(':') }}"
        
     - name: DEBUG - command outout
       ansible.builtin.debug:
