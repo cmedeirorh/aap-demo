@@ -2,7 +2,7 @@
 - name: DNF - check last Return-Code
   hosts: all
   become: true
-  gather_facts: false
+  gather_facts: true
 
   tasks:
     - name: DNF - gather last transaction stdout
@@ -18,7 +18,7 @@
 
     - name: Convert output to dictionary
       set_fact:
-        output: "{{ dnf_history_output.stdout | to_yaml }}"
+        output: "{{ dnf_history_output.stdout | to_nice_yaml }}"
 
     - name: DEBUG - command outout
       ansible.builtin.debug:
