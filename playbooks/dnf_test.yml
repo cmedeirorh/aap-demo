@@ -22,4 +22,4 @@
        
     - name: DEBUG - command outout
       ansible.builtin.debug:
-        msg: "{{ output }}"
+        msg: "{{ output.Return-Code }}"
