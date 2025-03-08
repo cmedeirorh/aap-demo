@@ -6,7 +6,7 @@
 
   tasks:
     - name: DNF - gather last transaction stdout
-      command: dnf history info last -q
+      command: dnf history info last -q |jq -s -R '[[ split("\n")[] | select(length > 0) | split("  +";"") | {(.[0]): .[1]}] | add]'
       register: dnf_history_output
       changed_when: false # indicate no system modifications.
       check_mode: false # disable checking for changes.
@@ -14,12 +14,12 @@
 
     - name: DEBUG - command outout
       ansible.builtin.debug:
-        var: dnf_history_output.stdout_lines
+        var: dnf_history_output
 
     - name: Convert output to dictionary
       set_fact:
         #output: "{{ dnf_history_output.stdout_lines | regex_replace('[ ''\"]', '') | split('\n') | from_yaml | to_json }}"
-        output: "{{ dnf_history_output.stdout.split('\\n')) | select() | map('split',':') | list }}"
+        output: dnf_history_output.stdout
        
     - name: DEBUG - command out
       ansible.builtin.debug:
