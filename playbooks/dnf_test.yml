@@ -18,7 +18,7 @@
 
     - name: Convert output to dictionary
       set_fact:
-        output: "{{ dnf_history_output.stdout_lines[6] | regex_replace('[ ''\"]', '') | split('\n') | from_yaml | to_json }}"
+        output: "{{ dnf_history_output.output[6] | regex_replace('[ ''\"]', '') | split('\n') | from_yaml | to_json }}"
         #output: dnf_history_output.stdout
        
     - name: DEBUG - command out
