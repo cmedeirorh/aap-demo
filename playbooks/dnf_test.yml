@@ -16,14 +16,15 @@
       ansible.builtin.debug:
         var: dnf_history_output
 
-    - name: Convert output to dictionary
+    - name: Get line on output and clean it
       set_fact:
-        output: "{{ dnf_history_output.stdout_lines[6] | regex_replace('[ ''\"]', '') | split('\n') | from_yaml }}"
+        #output: "{{ dnf_history_output.stdout_lines[6] | regex_replace('[ ''\"]', '') | split('\n') | from_yaml }}"
+        output: "{{ dnf_history_output.stdout_lines[6] | from_yaml }}"
     
-    - name: Convert output to dictionary
+    - name: Convert string to list
       set_fact:        
-        output2: "{{ output[0] | split(':') }}"
+        output_final: "{{ output[0] | split(':') }}"
               
     - name: DEBUG - command out
       ansible.builtin.debug:
-        var: output2[1]
+        var: output_final[1]
