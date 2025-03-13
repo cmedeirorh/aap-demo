@@ -6,7 +6,7 @@
 
   tasks:
     - name: DNF - gather last transaction stdout
-      command: dnf history info last -q |grep Code
+      command: dnf history info last -q
       register: dnf_history_output
       changed_when: false # indicate no system modifications.
       check_mode: false # disable checking for changes.
