@@ -23,4 +23,4 @@
        
     - name: DEBUG - command out
       ansible.builtin.debug:
-        msg: "{{ output[0] | split(':') }}"
+        var: split.output[0]
