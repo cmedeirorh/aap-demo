@@ -18,7 +18,7 @@
 
     - name: Get line on output and clean it
       set_fact:
-        output: "{{ dnf_history_output.stdout_lines[6] | regex_replace('[ ''\"]', '') | split('\n') | from_yaml }}"
+        output: "{{ dnf_history_output.stdout_lines[6] | regex_replace('[ ''\"]', '') | from_yaml }}"
         #output: "{{ dnf_history_output.stdout_lines[6] | from_yaml }}"
     
     - name: Convert string to list
